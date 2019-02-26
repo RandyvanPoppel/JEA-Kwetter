@@ -1,4 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+<persistence version="2.0"
+             xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+    <persistence-unit name="JEA-Kwetter-TEST" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <!-- Entity classes -->
+        <class>models.Kweet</class>
+        <properties>
+            <!-- The JDBC driver of your database -->
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <!-- The JDBC URL to the database instance -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://studmysql01.fhict.local:3306/dbi318461"/>
+            <!-- The database username -->
+            <property name="javax.persistence.jdbc.user" value="dbi318461"/>
+            <!-- The database password -->
+            <property name="javax.persistence.jdbc.password" value="geheim123"/>
+            <property name="eclipselink.logging.level" value="FINE"/>
+            <!-- EclipseLink should create the database schema automatically -->
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+            <property name="eclipselink.ddl-generation.output-mode"
+                      value="database"/>
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="JEA-Kwetter" transaction-type="JTA">
+        <jta-data-source>jdbc/JEA-Kwetter</jta-data-source>
+        <class>models.Kweet</class>
+        <properties>
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+        </properties>
+    </persistence-unit>
 
 </persistence>
