@@ -1,8 +1,8 @@
 package dao.implementations;
 
 import dao.JPA;
-import dao.interfaces.KweeterDAO;
-import models.Kweeter;
+import dao.interfaces.KweetDAO;
+import models.Kweet;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -11,29 +11,29 @@ import java.util.ArrayList;
 
 @Stateless
 @JPA
-public class KweeterDAOJPA implements KweeterDAO {
+public class KweetDAOJPA implements KweetDAO {
     @PersistenceContext(unitName = "JEA-Kwetter")
     private EntityManager em;
 
-    public KweeterDAOJPA() {}
+    public KweetDAOJPA() {}
 
     @Override
-    public void addKweeter(Kweeter kweeter) {
-        em.persist(kweeter);
+    public void addKweet(Kweet kweet) {
+        em.persist(kweet);
     }
 
     @Override
-    public void removeKweeter(Kweeter kweeter) {
+    public void removeKweet(Kweet kweet) {
 
     }
 
     @Override
-    public Kweeter findByUserName(String username) {
+    public Kweet findByMessage(String username) {
         return null;
     }
 
     @Override
-    public ArrayList<Kweeter> getKweeters() {
+    public ArrayList<Kweet> getKweets() {
         return null;
     }
 }

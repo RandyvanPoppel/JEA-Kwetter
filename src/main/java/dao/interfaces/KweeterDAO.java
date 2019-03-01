@@ -5,11 +5,11 @@ import models.Kweeter;
 import java.util.ArrayList;
 
 public interface KweeterDAO {
-    void addKwetteraar(Kweeter kweeter);
+    void addKweeter(Kweeter kweeter);
 
-    void removeKwetteraar(Kweeter kweeter);
+    void removeKweeter(Kweeter kweeter);
 
     Kweeter findByUserName(String username);
 
-    ArrayList<Kweeter> getKwetteraars();
+    ArrayList<Kweeter> getKweeters();
 }

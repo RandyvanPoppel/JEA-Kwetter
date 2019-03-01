@@ -4,17 +4,26 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
-@Entity()
-@Table(name = "Kweeter")
+@Entity(name = "Kweeter")
+@Table(name = "kweeter")
 @XmlRootElement
 public class Kweeter extends BaseModel implements Serializable {
+
     @Id
     @GeneratedValue
-    @Column(name = "kweeterID")
     private Long id;
-    @Column(name = "username", unique = true)
+
+    @Column(unique = true)
     private String username;
+
+    @OneToMany(
+            mappedBy = "kweeter",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Kweet> kweets = new ArrayList<>();
 
     // Kwetteraars that this Kweeter follows
 //    @ElementCollection
@@ -36,6 +45,26 @@ public class Kweeter extends BaseModel implements Serializable {
         this.username = username;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void addKweet(Kweet kweet)
+    {
+        kweets.add(kweet);
+        kweet.setKweeter(this);
+    }
+
+    public void removeKweer(Kweet kweet)
+    {
+        kweets.remove(kweet);
+        kweet.setKweeter(null);
+    }
+
 //    public void addFollower(Kweeter kwetteraar) // Add new Kweeter that follows this Kweeter
 //    {
 //        followedKwetteraars.add(kwetteraar);
@@ -55,12 +84,4 @@ public class Kweeter extends BaseModel implements Serializable {
 //    {
 //        followedKwetteraars.remove(kwetteraar);
 //    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 }

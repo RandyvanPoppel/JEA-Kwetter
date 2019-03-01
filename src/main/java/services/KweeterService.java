@@ -17,6 +17,6 @@ public class KweeterService {
 
     public void addKwetteraar(Kweeter kweeter)
     {
-        kweeterDAO.addKwetteraar(kweeter);
+        kweeterDAO.addKweeter(kweeter);
     }
 }
