@@ -6,7 +6,7 @@
     <persistence-unit name="JEA-Kwetter-TEST" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <!-- Entity classes -->
-        <class>models.Kweet</class>
+        <class>models.Kweeter</class>
         <properties>
             <!-- The JDBC driver of your database -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
@@ -26,7 +26,7 @@
 
     <persistence-unit name="JEA-Kwetter" transaction-type="JTA">
         <jta-data-source>jdbc/JEA-Kwetter</jta-data-source>
-        <class>models.Kweet</class>
+        <class>models.Kweeter</class>
         <properties>
             <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
         </properties>

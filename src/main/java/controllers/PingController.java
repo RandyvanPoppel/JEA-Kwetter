@@ -10,6 +10,7 @@ public class PingController {
 
     @GET
     public String ping() {
+        System.out.println("REQUEST RECEIVED");
         return "Enjoy Java EE 8!";
     }
 
