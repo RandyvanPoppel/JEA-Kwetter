@@ -59,7 +59,7 @@ public class Kweeter extends BaseModel implements Serializable {
         kweet.setKweeter(this);
     }
 
-    public void removeKweer(Kweet kweet)
+    public void removeKweet(Kweet kweet)
     {
         kweets.remove(kweet);
         kweet.setKweeter(null);
