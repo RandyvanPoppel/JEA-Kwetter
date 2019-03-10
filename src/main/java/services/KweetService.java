@@ -31,7 +31,7 @@ public class KweetService {
         return kweetDAO.findByID(id);
     }
 
-    public Kweet findByMessage(String message)
+    public ArrayList<Kweet> findByMessage(String message)
     {
         return kweetDAO.findByMessage(message);
     }

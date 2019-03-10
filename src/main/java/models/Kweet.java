@@ -17,7 +17,7 @@ public class Kweet extends BaseModel implements Serializable {
     @JoinColumn(name = "kweeter_id")
     private Kweeter kweeter;
 
-    @Column(name = "message", unique = true)
+    @Column(name = "message")
     private String message;
 
     //    @ElementCollection

@@ -38,13 +38,9 @@ public class KweetDAOJPA implements KweetDAO {
     }
 
     @Override
-    public Kweet findByMessage(String message) {
-        Kweet kweet = em.find(Kweet.class, message);
-        if (kweet == null)
-        {
-            throw new EntityNotFoundException("Can't find Kweet with message: " + message);
-        }
-        return kweet;
+    public ArrayList<Kweet> findByMessage(String message) {
+        List<Kweet> kweets = em.createQuery("SELECT k FROM Kweet k WHERE message LIKE %" + message + "%").getResultList();
+        return (ArrayList<Kweet>) kweets;
     }
 
     @Override

@@ -39,7 +39,7 @@ public class KweetController extends BaseController {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public boolean removeKweet(String params) {
         HashMap<String, String> mappedParams = mapParams(params);
-        Kweet kweet = kweetService.findByMessage(mappedParams.get("message"));
+        Kweet kweet = kweetService.findByID(Long.parseLong(mappedParams.get("id")));
         if (kweet != null)
         {
             kweetService.removeKweet(kweet);
@@ -54,14 +54,14 @@ public class KweetController extends BaseController {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Kweet findByID(String params) {
         HashMap<String, String> mappedParams = mapParams(params);
-        return kweetService.findByID(Long.parseLong(mappedParams.get("message")));
+        return kweetService.findByID(Long.parseLong(mappedParams.get("id")));
     }
 
     @GET
     @Path("find_by_message")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Kweet findByMessage(String params) {
+    public ArrayList<Kweet> findByMessage(String params) {
         HashMap<String, String> mappedParams = mapParams(params);
         return kweetService.findByMessage(mappedParams.get("message"));
     }

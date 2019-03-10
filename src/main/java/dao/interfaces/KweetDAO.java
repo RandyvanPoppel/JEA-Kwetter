@@ -11,7 +11,7 @@ public interface KweetDAO {
 
     Kweet findByID(Long id);
 
-    Kweet findByMessage(String username);
+    ArrayList<Kweet> findByMessage(String username);
 
     ArrayList<Kweet> getKweets();
 }
