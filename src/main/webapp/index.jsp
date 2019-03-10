@@ -10,6 +10,7 @@
 <h2>Hello World!</h2>
 <button id="pingBtn">PingController [AJAX: ping]</button>
 <button id="addKweeterBtn">KweeterController [AJAX: addKweeter]</button>
+<button id="addKweetBtn">KweetController [AJAX: addKweet]</button>
 
 <script>
     $('#pingBtn').on('click', function () {
@@ -34,7 +35,24 @@
             url: "/JEA-Kwetter-1.0/api/kweeter/add",
             dataType: "json",
             method: "POST",
-            data: {"username": "test1"},
+            data: {"username": "testKweeter"},
+            success: function (result) {
+                console.log(result);
+            }
+        });
+    });
+
+    $('#addKweetBtn').on('click', function () {
+        console.log("Button pressed");
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            url: "/JEA-Kwetter-1.0/api/kweet/add",
+            dataType: "json",
+            method: "POST",
+            data: {"username": "testKweeter", "message": "testMessage"},
             success: function (result) {
                 console.log(result);
             }

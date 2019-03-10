@@ -29,6 +29,7 @@ public class KweetController extends BaseController {
         HashMap<String, String> mappedParams = mapParams(params);
         // TODO: Add auth to specify Kweeter
         Kweet kweet = new Kweet(kweeterService.findByUserName(mappedParams.get("username")), mappedParams.get("message"));
+        System.out.println(kweet.toString());
         kweetService.addKweet(kweet);
         return kweet;
     }
