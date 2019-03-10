@@ -3,6 +3,8 @@ package models;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "Kweet")
 @Table(name = "kweet")
@@ -20,10 +22,12 @@ public class Kweet extends BaseModel implements Serializable {
     @Column(name = "message")
     private String message;
 
-    //    @ElementCollection
-//    @CollectionTable(name ="likes" , joinColumns=@JoinColumn(name="id"))
-//    @Column(name="kweet")
-//    private ArrayList<Like> likes = new ArrayList<Like>();
+    @OneToMany(
+            mappedBy = "kweet",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Comment> comments = new ArrayList<>();
 
     public Kweet() {}
 
@@ -33,17 +37,12 @@ public class Kweet extends BaseModel implements Serializable {
         this.message = message;
     }
 
-    public void setKweeter(Kweeter kweeter)
-    {
-        this.kweeter = kweeter;
+    public Kweeter getKweeter() {
+        return kweeter;
     }
 
     public String getMessage() {
         return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     @Override

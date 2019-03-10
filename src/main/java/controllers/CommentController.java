@@ -1,6 +1,7 @@
 package controllers;
 
-import models.Kweet;
+import models.Comment;
+import services.CommentService;
 import services.KweetService;
 import services.KweeterService;
 
@@ -12,8 +13,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 @Stateless
-@Path("kweet")
-public class KweetController extends BaseController {
+@Path("comment")
+public class CommentController extends BaseController {
+
+    @Inject
+    CommentService commentService;
 
     @Inject
     KweetService kweetService;
@@ -25,12 +29,12 @@ public class KweetController extends BaseController {
     @Path("add")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Kweet addKweeter(String params) {
+    public Comment addComment(String params) {
         HashMap<String, String> mappedParams = mapParams(params);
         // TODO: Add auth to specify Kweeter
-        Kweet kweet = new Kweet(kweeterService.findByUserName(mappedParams.get("username")), mappedParams.get("message"));
-        kweetService.addKweet(kweet);
-        return kweet;
+        Comment comment = new Comment(kweeterService.findByUserName(mappedParams.get("username")), kweetService.findByID(Long.parseLong(mappedParams.get("kweet_id"))), mappedParams.get("message"));
+        commentService.addComment(comment);
+        return comment;
     }
 
     @DELETE
@@ -39,10 +43,10 @@ public class KweetController extends BaseController {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public boolean removeKweet(String params) {
         HashMap<String, String> mappedParams = mapParams(params);
-        Kweet kweet = kweetService.findByID(Long.parseLong(mappedParams.get("id")));
-        if (kweet != null)
+        Comment comment = commentService.findByID(Long.parseLong(mappedParams.get("id")));
+        if (comment != null)
         {
-            kweetService.removeKweet(kweet);
+            commentService.removeComment(comment);
             return true;
         }
         return false;
@@ -52,26 +56,26 @@ public class KweetController extends BaseController {
     @Path("find")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Kweet findByID(String params) {
+    public Comment findByID(String params) {
         HashMap<String, String> mappedParams = mapParams(params);
-        return kweetService.findByID(Long.parseLong(mappedParams.get("id")));
+        return commentService.findByID(Long.parseLong(mappedParams.get("id")));
     }
 
     @GET
     @Path("find_by_message")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public ArrayList<Kweet> findByMessage(String params) {
+    public ArrayList<Comment> findByMessage(String params) {
         HashMap<String, String> mappedParams = mapParams(params);
-        return kweetService.findByMessage(mappedParams.get("message"));
+        return commentService.findByMessage(mappedParams.get("message"));
     }
 
     @GET
     @Path("all")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public ArrayList<Kweet> getKweets()
+    public ArrayList<Comment> getComments()
     {
-        return kweetService.getKweets();
+        return commentService.getComments();
     }
 }

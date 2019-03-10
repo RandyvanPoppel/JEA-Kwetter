@@ -56,13 +56,11 @@ public class Kweeter extends BaseModel implements Serializable {
     public void addKweet(Kweet kweet)
     {
         kweets.add(kweet);
-        kweet.setKweeter(this);
     }
 
     public void removeKweet(Kweet kweet)
     {
         kweets.remove(kweet);
-        kweet.setKweeter(null);
     }
 
 //    public void addFollower(Kweeter kwetteraar) // Add new Kweeter that follows this Kweeter
