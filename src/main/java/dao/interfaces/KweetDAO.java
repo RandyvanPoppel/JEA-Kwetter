@@ -9,6 +9,8 @@ public interface KweetDAO {
 
     void removeKweet(Kweet kweet);
 
+    Kweet findByID(Long id);
+
     Kweet findByMessage(String username);
 
     ArrayList<Kweet> getKweets();

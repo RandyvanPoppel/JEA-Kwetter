@@ -5,9 +5,9 @@ import dao.interfaces.KweetDAO;
 import models.Kweet;
 
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Stateless
 @JPA
@@ -24,16 +24,32 @@ public class KweetDAOJPA implements KweetDAO {
 
     @Override
     public void removeKweet(Kweet kweet) {
-
+        em.remove(kweet);
     }
 
     @Override
-    public Kweet findByMessage(String username) {
-        return null;
+    public Kweet findByID(Long id) {
+        Kweet kweet = em.find(Kweet.class, id);
+        if (kweet == null)
+        {
+            throw new EntityNotFoundException("Can't find Kweet with ID: " + id);
+        }
+        return kweet;
+    }
+
+    @Override
+    public Kweet findByMessage(String message) {
+        Kweet kweet = em.find(Kweet.class, message);
+        if (kweet == null)
+        {
+            throw new EntityNotFoundException("Can't find Kweet with message: " + message);
+        }
+        return kweet;
     }
 
     @Override
     public ArrayList<Kweet> getKweets() {
-        return null;
+        List<Kweet> kweets = em.createQuery("SELECT k FROM Kweet k").getResultList();
+        return (ArrayList<Kweet>) kweets;
     }
 }
