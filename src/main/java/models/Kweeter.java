@@ -12,9 +12,6 @@ import java.util.List;
 public class Kweeter extends BaseModel implements Serializable {
 
     @Id
-    @GeneratedValue
-    private Long id;
-
     @Column(unique = true)
     private String username;
 

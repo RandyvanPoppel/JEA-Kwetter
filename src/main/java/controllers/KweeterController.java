@@ -29,6 +29,15 @@ public class KweeterController extends BaseController {
         return kweeter;
     }
 
+    @POST
+    @Path("add2")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Kweeter createStudent(Kweeter kweeter) {
+        kweeterService.addKweeter(kweeter);
+        return kweeter;
+    }
+
     @DELETE
     @Path("remove")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
