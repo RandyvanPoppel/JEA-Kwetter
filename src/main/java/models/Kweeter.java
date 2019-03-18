@@ -9,7 +9,7 @@ import java.util.List;
 @Entity(name = "Kweeter")
 @Table(name = "kweeter")
 @XmlRootElement
-public class Kweeter extends BaseModel implements Serializable {
+public class Kweeter extends User implements Serializable {
 
     @Id
     @Column(unique = true)

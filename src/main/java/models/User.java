@@ -4,9 +4,10 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
-@Entity()
+@Entity(name = "User")
+@Table(name = "user")
 @XmlRootElement
-public class User implements Serializable {
+public abstract class User extends BaseModel implements Serializable {
 
     @Id @GeneratedValue
     private Long id;
