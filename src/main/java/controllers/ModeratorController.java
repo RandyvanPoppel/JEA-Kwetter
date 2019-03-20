@@ -1,7 +1,7 @@
 package controllers;
 
-import models.Admin;
-import services.AdminService;
+import models.Moderator;
+import services.ModeratorService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -10,20 +10,20 @@ import javax.ws.rs.core.MediaType;
 import java.util.HashMap;
 
 @Stateless
-@Path("admin")
-public class AdminController extends BaseController {
+@Path("moderator")
+public class ModeratorController extends BaseController {
     @Inject
-    AdminService adminService;
+    ModeratorService moderatorService;
 
     @POST
     @Path("add")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Admin addAdmin(String params) {
+    public Moderator addModerator(String params) {
         HashMap<String, String> mappedParams = mapParams(params);
-        Admin admin = new Admin();
-        adminService.addAdmin(admin);
-        return admin;
+        Moderator moderator = new Moderator();
+        moderatorService.addModerator(moderator);
+        return moderator;
     }
 
     @DELETE
@@ -32,10 +32,10 @@ public class AdminController extends BaseController {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public boolean removeKweet(String params) {
         HashMap<String, String> mappedParams = mapParams(params);
-        Admin admin = adminService.findByID(Long.parseLong(mappedParams.get("id")));
-        if (admin != null)
+        Moderator moderator = moderatorService.findByID(Long.parseLong(mappedParams.get("id")));
+        if (moderator != null)
         {
-            adminService.removeAdmin(admin);
+            moderatorService.removeModerator(moderator);
             return true;
         }
         return false;
@@ -45,8 +45,8 @@ public class AdminController extends BaseController {
     @Path("find")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Admin findByID(String params) {
+    public Moderator findByID(String params) {
         HashMap<String, String> mappedParams = mapParams(params);
-        return adminService.findByID(Long.parseLong(mappedParams.get("id")));
+        return moderatorService.findByID(Long.parseLong(mappedParams.get("id")));
     }
 }
