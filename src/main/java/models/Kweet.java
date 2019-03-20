@@ -37,6 +37,11 @@ public class Kweet extends BaseModel implements Serializable {
         this.message = message;
     }
 
+    public Long getID()
+    {
+        return id;
+    }
+
     public Kweeter getKweeter() {
         return kweeter;
     }

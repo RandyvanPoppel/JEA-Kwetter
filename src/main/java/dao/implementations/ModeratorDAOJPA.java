@@ -32,7 +32,7 @@ public class ModeratorDAOJPA implements ModeratorDAO {
         Moderator moderator = em.find(Moderator.class, id);
         if (moderator == null)
         {
-            throw new EntityNotFoundException("Can't find Admin with ID: " + id);
+            throw new EntityNotFoundException("Can't find Moderator with ID: " + id);
         }
         return moderator;
     }
